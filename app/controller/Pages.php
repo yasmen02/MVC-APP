@@ -1,21 +1,27 @@
 <?php
-
 class Pages extends Controller {
     public function __construct(){
-            //load a model
-        $this->postModel = $this->model('Post');
+
     }
 
     public function index(){
-        //get model function
-        $posts = $this->postModel->getPosts();
-        $data = ['title' => 'Welcome',
-            'posts' => $posts];
+        if(isLoggedIn()){
+            redirect('posts');
+        }
+
+        $data = [
+            'title' => 'SharePosts',
+            'description' => 'Simple social network built on the TraversyMVC PHP framework'
+        ];
+
         $this->view('pages/index', $data);
     }
 
     public function about(){
-        $data = ['title' => 'About Us'];
+        $data = [
+            'title' => 'About Us',
+            'description' => 'App to share posts with other users'
+        ];
 
         $this->view('pages/about', $data);
     }
